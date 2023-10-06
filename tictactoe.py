@@ -60,7 +60,7 @@ def create3x3board():
 
             for row in range(3):
                 for column in range(3):
-                    buttons[row][column].config(bg="yellow")
+                    buttons[row][column].config(bg="blue")
             return "Tie"
 
         else:
@@ -103,7 +103,7 @@ def create3x3board():
     window.title("Tic-Tac-Toe")
 
     window.resizable(False, False)
-    window_height = 500
+    window_height = 700
 
     window_width = 900
     screen_width = window.winfo_screenwidth()
