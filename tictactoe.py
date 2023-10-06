@@ -93,18 +93,7 @@ def create3x3board():
                 buttons[row][column].config(text="",bg="#F0F0F0")
 
 
-    def fourboard():
-        
-        window.destroy()
-        from tictactoe_4x4 import create4x4board
-        create4x4board()
-    
-    def fiveboard():
-        
-        window.destroy()
-        from tictactoe_5x5 import create5x5board
-        create5x5board()
-        
+ 
     
 
 
@@ -131,11 +120,8 @@ def create3x3board():
 
 
 
-    sub_menu.add_command(label = '4x4 board', command = fourboard)
-    sub_menu.add_command(label = '5x5 board', command = fiveboard)
 
-        # add the File menu to the menubar
-    file_menu.add_cascade(label = "Game Types", menu = sub_menu)
+   
     global players, player
     players = ["x", "o"]
     player = random.choice(players)
@@ -163,7 +149,7 @@ def create3x3board():
             buttons[row][column].grid(row=row,column=column)
     window.mainloop()
 
-    #https://www.youtube.com/watch?v=V9MbQ2Xl4CE
+
 
 if __name__ == "__main__":
     create3x3board()
