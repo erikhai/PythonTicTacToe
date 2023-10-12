@@ -1,13 +1,20 @@
 from tkinter import *
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
+from tkinter import messagebox
 import random
 
 
 
 def create3x3board():
+    global players, player
+    global xPlayerWins, yPlayerWins
+    xPlayerWins = 0
+    yPlayerWins = 0
+
     def next_turn(row, column):
         global player
+        global xPlayerWins, yPlayerWins
         if buttons[row][column]['text'] == "" and check_winner() is False:
             if player == players[0]:
                 buttons[row][column]['text'] = player
@@ -16,6 +23,10 @@ def create3x3board():
                     label.config(text = ("Player " + players[1] + " turn"))
                 elif check_winner() is True:
                     label.config(text = ("Player " + players[0] + " wins"))
+                    xPlayerWins += 1
+                    playerXWins = Label(text = "Player " + players[0] + " wins: " + str(xPlayerWins))
+                    playerXWins.place(x = 50, y = 100)
+                    
                 elif check_winner() == "Tie":
                     label.config(text = ("Tie!!"))
 
@@ -26,6 +37,9 @@ def create3x3board():
                     label.config(text = ("Player " + players[0] + " turn"))
                 elif check_winner() is True:
                     label.config(text = ("Player " + players[1] + " wins"))
+                    yPlayerWins += 1
+                    playerYWins = Label(text = "Player " + players[1] + " wins: " + str(yPlayerWins))
+                    playerYWins.place(x = 50, y = 130)
                 elif check_winner() == "Tie":
                     label.config(text = ("Tie!!"))
 
@@ -79,12 +93,23 @@ def create3x3board():
             return False
         else:
             return True
+    def clear_data():
+        playerXWins = Label(text = "Player " + players[0] + " wins: " + str(0))
+        playerXWins.place(x = 50, y = 100)
+        playerYWins = Label(text = "Player " + players[1] + " wins: " + str(0))
+        playerYWins.place(x = 50, y = 130)
+        new_game()
+    def information_box():
+        messagebox.showinfo("How to use this application", "This application will allow you to play a game of tic-tac-toe. You win the game by getting three marks either vertically, horiontally or diagonally. The game also keeps track of each players score which can be reset in the menu.")
+
 
     def new_game():
 
         global player
 
         player = random.choice(players)
+        xPlayerWins = 0
+        yPlayerWins = 0
 
         label.config(text = "Player " + player + " turn")
 
@@ -94,6 +119,15 @@ def create3x3board():
 
 
  
+    def show_settings():
+        messagebox.showinfo("Settings", "This is the settings menu.")
+
+    def show_sub_menu_item1():
+        messagebox.showinfo("Submenu Item 1", "This is submenu item 1.")
+
+    def show_sub_menu_item2():
+        messagebox.showinfo("Submenu Item 2", "This is submenu item 2.")
+
     
 
 
@@ -114,15 +148,27 @@ def create3x3board():
     menubar = Menu(window)
     window.config(menu = menubar)
     file_menu = Menu(menubar, tearoff = False)
+    file_menu.add_command(label= 'Clear Game Scores', command= clear_data)
+    file_menu.add_command(label= 'How This Application Works', command= information_box)
+    setting_submenu = Menu(file_menu, tearoff = False)
+    setting_submenu.add_command(label="Submenu Item 1", command=show_sub_menu_item1)
+    setting_submenu.add_command(label="Submenu Item 2", command=show_sub_menu_item2)
+    file_menu.add_cascade(label="Settings", menu=setting_submenu)
     file_menu.add_command(label= 'Exit', command= window.destroy)
+    
+
+    #settings_menu = Menu(menubar, tearoff=0)
+    
     menubar.add_cascade(label = "File", menu = file_menu)
+  
     sub_menu = Menu(file_menu, tearoff = 0)
 
 
 
 
    
-    global players, player
+    
+    
     players = ["x", "o"]
     player = random.choice(players)
     buttons = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -132,6 +178,11 @@ def create3x3board():
 
     label = Label(text = "Player " + player + " turn")
     label.pack(side = "top")
+
+    playerXWins = Label(text = "Player " + players[0] + " wins: " + str(xPlayerWins))
+    playerXWins.place(x = 50, y = 100)
+    playerYWins = Label(text = "Player " + players[1] + " wins: " + str(yPlayerWins))
+    playerYWins.place(x = 50, y = 130)
 
 
 

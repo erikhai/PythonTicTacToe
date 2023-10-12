@@ -12,3 +12,8 @@ https://www.youtube.com/watch?v=V9MbQ2Xl4CE
 
 ## What is the plan after this?
 After solidifying my understanding of tkinter, I plan to develop a few more GUIs such as a Hangman game, basic calculator, To do application and a weather app.
+
+## Version 1
+This is mainly based off of the tutorial. Only personal addition I made was adding a menu bar
+
+## Version 2
